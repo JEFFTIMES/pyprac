@@ -6,22 +6,23 @@ import simplyGUI.demos as demos
 
 """
 
-# call the verySimpleCalc function
-simpleCalc.verySimpleCalc()
 
+def main():
+    # call the verySimpleCalc function
+    simpleCalc.verySimpleCalc()
 
-# call the other functions
+    # call the other functions
 
-import simplyGUI.restrictInput as rsI
+    import simplyGUI.restrictInput as rsI
 
-rsI.numberInputOnly()
+    rsI.numberInputOnly()
 
-rsI.multilineDemo()
+    rsI.multilineDemo()
 
-demos.simpleTextInput()
+    demos.simpleTextInput()
 
-demos.manyCalendars()
+    demos.manyCalendars()
 
-demos.fileSelect()
+    demos.fileSelect()
 
-demos.fileCompare()
+    demos.fileCompare()

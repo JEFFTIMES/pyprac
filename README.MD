@@ -6,7 +6,7 @@ Initiating since 7th April 2021.
 
 
 
-## 7th April, 2021. 
+## 7th April 2021. 
 
 1. Today, I am trying to pair Github.com repo with my local PyCharm.
 

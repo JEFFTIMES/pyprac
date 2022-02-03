@@ -1,0 +1,15 @@
+[x = 2]
+[y = 3]
+The sum of [x] and [y] is [x + y].
+
+[name       = 'Magnus Lie Hetland' ]
+[email      = 'magnus@foo.bar' ]
+[language   = 'python' ]
+======================================================
+[import time]
+Dear [name],
+I would like to learn how to program. I hear you
+ use the [language] language a lot -- is it something I
+ should consider?
+And, by the way, is [email] your correct email address?
+Fooville, [time.asctime()]

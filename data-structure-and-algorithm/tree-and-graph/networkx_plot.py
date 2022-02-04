@@ -1,16 +1,9 @@
 import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
+from graph_samples import weighted_graph as graph 
 #% matplotlib inline
 
-graph = {
-    'A': {'B':2, 'C':3},
-    'B': {'A':2, 'C':2, 'D':2},
-    'C': {'A':3, 'B':2, 'D':3, 'E':2},
-    'D': {'B':2, 'C':3, 'E':1, 'F':3},
-    'E': {'C':2, 'D':1, 'F':1},
-    'F': {'D':3, 'E':1}
-}
 Graph = nx.Graph()
 for node in graph:
     Graph.add_nodes_from(node)

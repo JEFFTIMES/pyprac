@@ -25,3 +25,4 @@ Initiating since 7th April 2021.
 ## 5th Feb, 2022.
 1. add Prim's MST in tree-and-graph.
 2. add Dijkstra shortest path in tree-and-graph.
+3. add breadth-first-search and depth-first-search in tree-and-graph.

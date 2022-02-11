@@ -62,10 +62,14 @@ def PageRank_naive(graph, iters = 50):
 
 def PageRank_teleporting(graph, iters = 50, alpha=0.85, rounding=3):
   G, p = initialize_PageRank(graph)
+  # (1.0 - alpha) * u represents the probabilities of the suffers don't follow the links of the current site, 
+  # but randomly jump to the other sites with an even probability.
   u = np.ones(len(p)) / float(len(p))
   for i in range(iters):
     p = alpha * np.dot(G,p) + (1.0 - alpha) * u 
-  return np.round(p / np.sum(p), rounding)
+  # the sum of the probability distribution may not equal to 1 due to the the existence of the trap node,
+  # the probability distribution should be adjusted by devided by the sum of the probabilities.
+  return np.round(p / np.sum(p), rounding)    
 
 
 def test():

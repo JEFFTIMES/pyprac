@@ -190,7 +190,9 @@ whole evening, I hope?"
   encoding = 'utf-8'
   huffman = HuffmanCodec()
   compressed, prob, suffix = huffman.compress(text, encoding)
+
   print(f'compress rate: {len(compressed)/len(text)}\n')
+
   huffman2 = HuffmanCodec( probabilities=prob)
   text = huffman2.decompress(compressed, encoding, suffix=suffix)
   print(text)

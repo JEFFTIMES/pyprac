@@ -34,7 +34,7 @@ def lwz_text_decompress(encoded, encoding):
       new_key = max(reversed_dictionary.keys()) + 1 # generating new key:value as well as processing the decoding.
       new_subsequence = reversed_dictionary[previous] + bytes([s[0]])
       reversed_dictionary[new_key] = new_subsequence
-    else: # the encoded list contains a sumsequence which composed by repeating same element
+    else: # the encoded list contains a subsequence which composed by repeating elements
       s = reversed_dictionary[previous] + bytes([reversed_dictionary[previous][0]])
       decompressed += s
       new_key = max(reversed_dictionary.keys()) +1

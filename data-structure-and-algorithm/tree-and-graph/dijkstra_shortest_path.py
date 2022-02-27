@@ -109,11 +109,12 @@ def test():
     for start in graph:
         costs, parents, processed = dijkstra(graph, start)
         all[start] = parents
-    
+    pprint(graph)
     pprint(all)
 
     all2 = dict()
     w_graph = unweighted_to_weighted(uw_graph)
+    pprint(w_graph)
     for start in w_graph.keys():
         costs, parents, processed = dijkstra(w_graph, start)
         all2[start] = parents

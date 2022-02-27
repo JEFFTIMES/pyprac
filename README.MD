@@ -51,6 +51,7 @@ Initiating since 7th April 2021.
 1. revise depth-first-search to leverage networkx.
 2. add best-first-search in tree-and-graph.
 3. add create_maze in tree-and-graph.
+4. A* search
 
 
 

@@ -8,14 +8,23 @@ def dfs(graph, start, target=None):
         print ('Stack is: %s' % stack)
         vertex = stack.pop(-1)
         print ('Processing %s' % vertex)
+        
+        if vertex == target:
+            path.append(parents[vertex]+'->'+vertex)
+            return target, path[1:]
+        
+        # if all the neighbors are in the visited, the subtract is an empty set(), 
+        # that means the node is a dead end or a boundary node, the step should not
+        # be put in the path
+        if set(graph[vertex]) - set(parents.keys()):
+            path.append(parents[vertex]+'->'+vertex)
+        
         for candidate in graph[vertex]:
             if candidate not in parents:
                 parents[candidate] = vertex
                 stack.append(candidate)
                 print ('Adding %s to the stack' % candidate) 
-        path.append(parents[vertex]+'->'+vertex)
-        if vertex == target:
-            return target, path[1:]
+
     return None, path[1:]
 
 def dfs_2(graph, start, target=None):
@@ -58,9 +67,9 @@ def bfs(graph, start, target):
 def test():
     print(dfs(graph, 'A', 'F'))
 
-    print(dfs_2(graph, 'A', 'F'))
+    # print(dfs_2(graph, 'A','F'))
 
-    print(bfs(graph, 'A', 'G'))
+    # print(bfs(graph, 'A', 'G'))
 
 if __name__ == '__main__':
     test()

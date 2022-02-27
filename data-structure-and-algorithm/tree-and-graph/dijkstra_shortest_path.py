@@ -1,4 +1,3 @@
-from tkinter import W
 from graph_samples import weighted_graph as graph
 from graph_samples import numeric_unweighted_graph as uw_graph
 from unweighted_to_weighted import unweighted_to_weighted

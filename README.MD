@@ -41,6 +41,12 @@ Initiating since 7th April 2021.
 2. add polyas urn
 3. add quick_select with randomized
 
+## 20th Feb., 2022
+1. big data
+2. lzw compression
+3. map reduce 
+4. huffman compress
+
 ## 26th Feb, 2022
 1. revise depth-first-search to leverage networkx.
 2. add best-first-search in tree-and-graph.

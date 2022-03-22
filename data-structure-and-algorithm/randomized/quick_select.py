@@ -19,7 +19,7 @@ def quickselect(array, k, counter=0):
   # otherwise k locates in the right sub array, 
   # need to reset the k by deducing the length of the left sub array.
   k = k - len(left)
-  duplicates = len(array) - (len(left) + len(right)) # duplicates refer to the numbers of the duplicate pivot.
+  duplicates = len(array) - (len(left) + len(right)) # duplicates refer to the numbers the same as the pivot number.
   if duplicates > k: # duplicates > k means nothing left in the right sub array, the pivot is the median.
     return pivot, counter
   else: 
@@ -27,24 +27,6 @@ def quickselect(array, k, counter=0):
     k = k - duplicates
     return quickselect(right, k, counter)
 
-# median, counter= quickselect(arr, len(arr)//2)
-
-# print(f'median = {median}, counter = {counter}')
-
-# results = list()
-# for run in range(1000):
-#     n = 1001
-#     series = [np.random.randint(1,500) for i in range(n)]
-#     median,count = quickselect(series, n//2)
-#     assert(median==np.median(series))
-#     results.append(count)
-
-# print(f'mean of operations = {np.mean(results)}')
-
-# plt.hist(results, bins='auto')
-# plt.xlabel("Computations")
-# plt.ylabel("Frequency")
-# plt.show()
 
 input_size = [501, 1001, 5001, 10001, 20001, 50001]
 computations = list()

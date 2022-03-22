@@ -1,23 +1,18 @@
 from pprint import pprint
 def combination_gen(n, r):
-    # print('generator: (n)',n, '(r)', r)
     for i in range(len(n)):
-        #print('base (i):', i)
         if r == 1:
             yield (n[i],)
         else:
             gen = combination_gen(n[i+1:],r-1)
             for next in gen:
-                # print('underlay gen:', gen ,' (n)', n[i+1:len(n)], '(r)', r-1)
-                # print('underlayer gen yield:',next)
-                # print('current i:',i,'\nthis gen yield:', (n[i],) + next)
                 yield (n[i],) + next
                     
 def combination(l, k):
     return list(combination_gen(l, k))
 
 
-def permutation(array, r, res):
+def permutation(array, r, res=[]):
     # reach the base condition r==1, return current array
     if r == 1:
         # print('base:',array)

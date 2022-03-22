@@ -9,7 +9,7 @@ D[0,:] = list(range(c+1))
 D[:,0] = list(range(r+1))
 
 # start the compare between the letters of each word
-# from the first letter of the row word to each of the letters from the another one.
+# from the first letter of the row word to each of the letters from the another word.
 # if the s1[row]=s2[col], let the D[row][col] = D[row-1][col-1]
 # otherwise, D[row][col] = np.min ([ 
 #                               D[row-1][col] +1,   # a deletion
@@ -23,7 +23,7 @@ for row in range(1, r+1):
     else:
       D[row,col] = np.min([ D[row-1,col]+1, D[row,col-1]+1, D[row-1,col-1]+1 ])
 
-pd.DataFrame(D,index=list(' '+s1), columns=list(' '+s2))
+print(pd.DataFrame(D,index=list(' '+s1), columns=list(' '+s2)))
 
 # check what modifications happend on the word to transform it to the target.
 def modifications(distances, word, target):

@@ -54,6 +54,7 @@ class KruskalsMST():
     # iterating all the branches to an empty queue.
     while self.pq_weighted_edges:
       
+      print(self.connected)
       # pop up the least weighted branch
       weight, (start, end) = self.pq_weighted_edges.pop()
       
@@ -65,7 +66,7 @@ class KruskalsMST():
       # (3) update each vertex which in the connected list of the end vertex, let its connected 
       # list point to the start vertex's connected list, that propagates the connection among all 
       # the vertices which connected with the end vertex and the start vertex.
-      # if yes, discard the branch
+      # if yes, discard the branch because
       # the linked vertices in the connected list could reach current 'end' vertex again, that means
       # there is a loop should be generated if the 'end' vertex is added to the connected list.
       if end not in self.connected[start]:

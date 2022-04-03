@@ -7,13 +7,20 @@ def get_lowest_cost_node(nodes, processed):
     lowest_cost = float('inf')
     lowest_cost_node = None
     for node,cost in nodes.items():
-        if lowest_cost > cost and node not in processed:
+        if node not in processed and lowest_cost > cost :
             lowest_cost = cost
             lowest_cost_node = node
     return lowest_cost_node
 
 def dijkstra(graph, start, finish=None):
-    # initializing the costs table and the parents table
+    
+    # the costs dict{} remembers the minimum costs from the starting node to each remembered node.
+    # the parents dict{} remembers the parent of each node, when the finish node is given, it is 
+    # initialized as a key in the parents dict with a None value represents its parent is still not
+    # being found. once the parent of the finish node is found, the function returned. when the finish
+    # node is not given, the function walks through all the nodes of the graph until there is not any 
+    # node is not existed in the processed[].
+    
     infinity = float('inf')
     costs = {
         start:0,
@@ -27,61 +34,45 @@ def dijkstra(graph, start, finish=None):
         parents = {}    
     processed = []
 
-    # getting the first lowest cost node next to the start node
+    # dijkstra algorithm always takes the node with lowest cost to the statring node 
+    # as the beginning to explore the next step until reaches the 'finish' node (when 
+    # the 'finish' node is given), or exhausts all the nodes of the graph, so it needs 
+    # a costs{} to persist the cost of each discovered node to the starting node.
+    # other than the cost{}, a parents{} is crafted to log the segments of the path, 
+    # and a processed[] is created to avoid looping. 
+    # the two important operations the algorithm need to do are, first exploring neighbor 
+    # nodes of the lowest_cost_node, second updating the costs{}, parent{} and processed[].
+
+    # within the outter iteration, lays the inner iteration filling up the cost{} and 
+    # the parents{}. it grabs each neighbor node of the current lowest_cost_node, 
+    # calculates the cost from the starting node to the neighbor via the lowest_cost_node, 
+    # and insert/updates the neighbor node to both the costs{} and the parents{}.
+    # when the node in the costs{} being revisited again from other pathes, a condition needed
+    # to help the inner iteration to determine wether updates the cost or not by camparing
+    # the path of current route with its existed cost. 
+    
     lowest_cost_node = start 
-    # print(f'costs[]:{costs}, \nparents[]:{parents}, \nprocessed[]:{processed}\n')
-    # print(f'lowest cost node:{lowest_cost_node}')
+    cond = True
 
-    while lowest_cost_node is not None:
-        # get the neighbors of the node with the lowest cost to the start
+    while cond :
         neighbors=graph[lowest_cost_node]
-
-        # print(f'neighbors of {lowest_cost_node}: {neighbors}')
-
-        # checking the neighbors is in the costs{} dictionary
         for node, cost in neighbors.items():
-            # if node's neighbor exists in the costs{} dict, calculate the new_cost and 
-            # compare it to the costs[node], costs[node] represents the cost from start to the node
-            # new_cost = costs[lowest_cost_node] + cost, costs[lowest_cost_node] represents 
-            # the cost from start node to the lowest_cost_node, 'cost' represents the cost 
-            # from lowest_cost_node to this node.
             new_cost = costs[lowest_cost_node] + cost
-            if node in costs: 
-                # the cost of the new route is lower than the old one, updates both the costs{} and the parents{} dict
+            try: 
                 if new_cost < costs[node]:
-                    # print(f'{node} in costs[]:{costs}\nnew_cost:{new_cost} < costs[{node}]:{costs[node]}, update costs[{node}]={new_cost} and parents[{node}]={lowest_cost_node}')
                     costs[node] = new_cost
                     parents[node] = lowest_cost_node
-                # else:
-                    # print(f'{node} in costs[]:{costs}, but new_cost:{new_cost} >= costs[{node}]:{costs[node]}, no update occurred')
-            # else lowest_cost_node's neighbor does not exist in the costs{}, add it to the costs{} and the parents{}
-            else :
-                # print(f'{node} not in costs[]:{costs}')
+            except KeyError:
                 costs[node] = new_cost
                 parents[node] = lowest_cost_node
-                # print(f'update costs[{node}]={costs[lowest_cost_node] + cost} and parents[{node}]={lowest_cost_node}')
-
-            # try: 
-            #     if new_cost < costs[node]:
-            #         print(f'{node} in costs[]:{costs}\nnew_cost:{new_cost} < costs[{node}]:{costs[node]}, update costs[{node}]={new_cost} and parents[{node}]={lowest_cost_node}')
-            #         costs[node] = new_cost
-            #         parents[node] = lowest_cost_node
-            #     else:
-            #         print(f'{node} in costs[]:{costs}, but new_cost:{new_cost} >= costs[{node}]:{costs[node]}, no update occurred')
-            # except KeyError:
-            #     print(f'{node} not in costs[]:{costs}')
-            #     costs[node] = new_cost
-            #     parents[node] = lowest_cost_node
-            #     print(f'update costs[{node}]={costs[lowest_cost_node] + cost} and parents[{node}]={lowest_cost_node}')
-
-
-        # add the node to the processed[]
         processed.append(lowest_cost_node)
-        # get the next lowest cost node
         lowest_cost_node = get_lowest_cost_node(costs, processed)
-
-        # print(f'costs[]:{costs}, \nparents[]:{parents}, \nprocessed[]:{processed}')
-        # print(f'\nlowest cost node:{lowest_cost_node}')
+        
+        if finish is None:
+            cond = lowest_cost_node is not None
+        else:
+            cond = parents[finish] is None and lowest_cost_node is not None
+    
     return costs, parents, processed
 
 
@@ -105,6 +96,8 @@ def present_path(parents, finish):
 
 def test():
 
+    costs, parents, processed = dijkstra(graph, 'A', 'F')
+    pprint(parents)
     all = dict()
     for start in graph:
         costs, parents, processed = dijkstra(graph, start)

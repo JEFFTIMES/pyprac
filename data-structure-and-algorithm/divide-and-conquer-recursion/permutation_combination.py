@@ -15,11 +15,11 @@ def combination(l, k):
 def permutation(array, r, res=[]):
     # reach the base condition r==1, return current array
     if r == 1:
-        # print('base:',array)
+        print('base:',array)
         res.append([*array])
         return
     
-    # print('top level permutation() called, <input array>:',array,'<r>:',r)
+    print('called, <input array>:',array,'<r>:',r)
     
     # recursively calls itself to process the sub-array with r-1
     permutation(array, r-1, res)
@@ -31,10 +31,10 @@ def permutation(array, r, res=[]):
         
         if r % 2 == 0:
             array[i], array[r-1] = array[r-1], array[i]
-            # print('even r: array[',i,'] swapped with array[',r-1,']', array)
+            print('even r: array[',i,'] swapped with array[',r-1,']', array)
         else:
             array[0], array[r-1] = array[r-1], array[0]
-            # print('odd r: array[',0,'] swapped with array[',r-1,']', array)
+            print('odd r: array[',0,'] swapped with array[',r-1,']', array)
             
         
         # print('sub level permutation() called, <input array>:',array,'<r>:',r-1)
@@ -45,13 +45,13 @@ def permutation(array, r, res=[]):
 
 
 def test():
-  comb = combination('abcdef',3)
-  pprint(list(comb))
+    # comb = combination('abcdef',3)
+    # pprint(list(comb))
 
-  perm=[]
-  src = [1,2,3,4]
-  permutation(src, len(src), perm)
-  pprint(perm)
+    perm=[]
+    src = [1,2,3,4]
+    permutation(src, len(src), perm)
+    pprint(perm)
 
 if __name__ == '__main__':
-  test()
+    test()
